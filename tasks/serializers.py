@@ -15,8 +15,11 @@ class TaskSerializer(serializers.HyperlinkedModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
+        tasks = serializers.PrimaryKeyRelatedField(
+            many=True, queryset=Task.objects.all()
+        )
         model = User
         fields = [
-            "username",
+            "person",
             "password",
         ]
